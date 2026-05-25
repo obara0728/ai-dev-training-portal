@@ -107,7 +107,8 @@ main {
 }
 
 .menu-grid,
-.guide-layout {
+.guide-layout,
+.term-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
@@ -116,6 +117,7 @@ main {
 .card,
 .guide-block,
 .task-card,
+.term-card,
 .quiz-panel,
 .prompt-panel,
 .steps {
@@ -128,6 +130,7 @@ main {
 .card h3,
 .guide-block h3,
 .task-card h3,
+.term-card h3,
 .prompt-panel h3,
 .steps h3 {
   margin: 0 0 8px;
@@ -136,6 +139,7 @@ main {
 .card p,
 .guide-block p,
 .task-card p,
+.term-card p,
 .prompt-panel p {
   margin: 0;
   color: var(--muted);
@@ -170,6 +174,50 @@ main {
   padding: 4px 10px;
   font-size: 0.9rem;
   font-weight: 700;
+}
+
+.term-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.term-filter {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 8px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.term-filter.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.term-card {
+  display: grid;
+  gap: 12px;
+}
+
+.term-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.term-example {
+  border-left: 4px solid var(--warm);
+  background: #fff8ed;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #5f3b08;
 }
 
 .task-card ul {

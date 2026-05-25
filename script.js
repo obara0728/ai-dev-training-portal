@@ -44,6 +44,63 @@ const tasks = [
   },
 ];
 
+const terms = [
+  {
+    tool: "GitHub",
+    name: "リポジトリ",
+    meaning: "プロジェクトのファイルや変更履歴をまとめて入れる箱です。",
+    example: "研修ポータルでは、READMEやアプリのファイルを1つのリポジトリで管理します。",
+  },
+  {
+    tool: "GitHub",
+    name: "Commit",
+    meaning: "ファイルの変更を保存して、履歴として残す操作です。",
+    example: "READMEを直したらCommitして、いつ何を変えたか残します。",
+  },
+  {
+    tool: "GitHub",
+    name: "README",
+    meaning: "プロジェクトの目的や使い方を書く説明書です。",
+    example: "社内メンバーはまずREADMEを読むと、プロジェクトの概要がわかります。",
+  },
+  {
+    tool: "Codex",
+    name: "プロンプト",
+    meaning: "AIに入力する依頼文や質問文です。",
+    example: "「初心者向けのクイズ画面を作って」と書くと、それがプロンプトになります。",
+  },
+  {
+    tool: "Codex",
+    name: "実装",
+    meaning: "設計やアイデアを、実際に動く画面や機能にすることです。",
+    example: "用語クイズの画面をHTML、CSS、JavaScriptで作ることが実装です。",
+  },
+  {
+    tool: "Codex",
+    name: "検証",
+    meaning: "作ったものが想定通りに動くか確認することです。",
+    example: "クイズで回答したら正解表示が出るか、ブラウザで確認します。",
+  },
+  {
+    tool: "Claude Code",
+    name: "コードレビュー",
+    meaning: "コードに問題や改善点がないか確認することです。",
+    example: "Claude Codeに、読みやすさやミスがないか見てもらいます。",
+  },
+  {
+    tool: "Claude Code",
+    name: "リファクタリング",
+    meaning: "動きは変えずに、コードを読みやすく整理することです。",
+    example: "長くなった処理を分けて、あとから直しやすくします。",
+  },
+  {
+    tool: "Claude Code",
+    name: "エラー",
+    meaning: "プログラムがうまく動かない原因や、そのときに出るメッセージです。",
+    example: "画面が表示されないときは、エラー文を一緒に伝えると相談しやすくなります。",
+  },
+];
+
 const quizQuestions = [
   {
     category: "GitHub",
@@ -158,6 +215,8 @@ const quizQuestions = [
 const buttons = document.querySelectorAll(".tab-button");
 const views = document.querySelectorAll(".view");
 const taskList = document.querySelector("#task-list");
+const termList = document.querySelector("#term-list");
+const termFilters = document.querySelectorAll(".term-filter");
 const quizCategory = document.querySelector("#quiz-category");
 const quizProgress = document.querySelector("#quiz-progress");
 const quizScore = document.querySelector("#quiz-score");
@@ -203,6 +262,36 @@ taskList.innerHTML = tasks
     `
   )
   .join("");
+
+function renderTerms(filter = "all") {
+  const filteredTerms =
+    filter === "all" ? terms : terms.filter((term) => term.tool === filter);
+
+  termList.innerHTML = filteredTerms
+    .map(
+      (term) => `
+        <article class="term-card">
+          <div class="term-card-header">
+            <h3>${term.name}</h3>
+            <span class="pill">${term.tool}</span>
+          </div>
+          <p>${term.meaning}</p>
+          <div class="term-example">
+            <strong>例:</strong> ${term.example}
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+termFilters.forEach((filterButton) => {
+  filterButton.addEventListener("click", () => {
+    termFilters.forEach((button) => button.classList.remove("active"));
+    filterButton.classList.add("active");
+    renderTerms(filterButton.dataset.termFilter);
+  });
+});
 
 function renderQuizQuestion() {
   const item = quizQuestions[currentQuizIndex];
@@ -281,3 +370,4 @@ quizNext.addEventListener("click", () => {
 });
 
 renderQuizQuestion();
+renderTerms();
