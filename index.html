@@ -20,6 +20,7 @@
     <nav class="tabs" aria-label="学習メニュー">
       <button class="tab-button active" data-view="home">トップ</button>
       <button class="tab-button" data-view="tasks">実践課題</button>
+      <button class="tab-button" data-view="terms">用語学習</button>
       <button class="tab-button" data-view="quiz">用語クイズ</button>
       <button class="tab-button" data-view="github">GitHubガイド</button>
       <button class="tab-button" data-view="prompts">プロンプト集</button>
@@ -48,6 +49,11 @@
             <h3>Claude Codeで見直す</h3>
             <p>作ったコードを読みやすくしたり、改善点を確認したりします。</p>
           </article>
+          <article class="card">
+            <span class="card-label">Step 4</span>
+            <h3>用語を覚えて確認する</h3>
+            <p>まず用語学習で意味をつかみ、そのあと用語クイズで理解度を確認します。</p>
+          </article>
         </div>
       </section>
 
@@ -59,10 +65,26 @@
         <div id="task-list" class="task-list"></div>
       </section>
 
+      <section id="terms" class="view">
+        <div class="section-heading">
+          <h2>用語学習</h2>
+          <p>クイズの前に、GitHub、Codex、Claude Codeの基本用語を確認します。</p>
+        </div>
+
+        <div class="term-tools" aria-label="ツール別用語">
+          <button class="term-filter active" type="button" data-term-filter="all">すべて</button>
+          <button class="term-filter" type="button" data-term-filter="GitHub">GitHub</button>
+          <button class="term-filter" type="button" data-term-filter="Codex">Codex</button>
+          <button class="term-filter" type="button" data-term-filter="Claude Code">Claude Code</button>
+        </div>
+
+        <div id="term-list" class="term-list"></div>
+      </section>
+
       <section id="quiz" class="view">
         <div class="section-heading">
           <h2>専門用語クイズ</h2>
-          <p>GitHub、Codex、Claude Codeの基本用語を4択で確認します。</p>
+          <p>用語学習で確認した内容を、4択でチェックします。</p>
         </div>
 
         <article class="quiz-panel" aria-live="polite">
