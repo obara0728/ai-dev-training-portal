@@ -20,6 +20,7 @@
     <nav class="tabs" aria-label="学習メニュー">
       <button class="tab-button active" data-view="home">トップ</button>
       <button class="tab-button" data-view="tasks">実践課題</button>
+      <button class="tab-button" data-view="quiz">用語クイズ</button>
       <button class="tab-button" data-view="github">GitHubガイド</button>
       <button class="tab-button" data-view="prompts">プロンプト集</button>
     </nav>
@@ -56,6 +57,27 @@
           <p>完了条件を見ながら、ひとつずつ進めます。</p>
         </div>
         <div id="task-list" class="task-list"></div>
+      </section>
+
+      <section id="quiz" class="view">
+        <div class="section-heading">
+          <h2>専門用語クイズ</h2>
+          <p>GitHub、Codex、Claude Codeの基本用語を4択で確認します。</p>
+        </div>
+
+        <article class="quiz-panel" aria-live="polite">
+          <div class="quiz-status">
+            <span id="quiz-category" class="pill">GitHub</span>
+            <span id="quiz-progress">1 / 9</span>
+            <span id="quiz-score">正解 0</span>
+          </div>
+
+          <h3 id="quiz-question">問題文</h3>
+          <div id="quiz-options" class="quiz-options"></div>
+
+          <div id="quiz-feedback" class="quiz-feedback" hidden></div>
+          <button id="quiz-next" class="primary-action" type="button" hidden>次の問題へ</button>
+        </article>
       </section>
 
       <section id="github" class="view">
