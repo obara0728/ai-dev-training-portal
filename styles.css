@@ -106,9 +106,16 @@ main {
   color: var(--muted);
 }
 
+.count-note {
+  margin: -8px 0 18px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
 .menu-grid,
 .guide-layout,
-.term-list {
+.term-list,
+.prompt-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
@@ -118,6 +125,7 @@ main {
 .guide-block,
 .task-card,
 .term-card,
+.prompt-card,
 .quiz-panel,
 .prompt-panel,
 .steps {
@@ -183,7 +191,9 @@ main {
   margin-bottom: 18px;
 }
 
-.term-filter {
+.term-filter,
+.level-button,
+.prompt-category {
   min-height: 38px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -194,7 +204,9 @@ main {
   cursor: pointer;
 }
 
-.term-filter.active {
+.term-filter.active,
+.level-button.active,
+.prompt-category.active {
   border-color: var(--accent);
   background: var(--accent);
   color: #fff;
@@ -223,6 +235,57 @@ main {
 .task-card ul {
   margin: 10px 0 0;
   padding-left: 20px;
+}
+
+.answer-check {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.answer-check summary {
+  color: var(--accent-dark);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.answer-check p {
+  margin: 10px 0 0;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.level-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.score-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.score-board > div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 14px 16px;
+}
+
+.score-board strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.08rem;
+}
+
+.score-label {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 800;
 }
 
 .quiz-panel {
@@ -320,6 +383,27 @@ main {
 .steps ol {
   margin-bottom: 0;
   padding-left: 22px;
+}
+
+.prompt-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.prompt-list {
+  margin-bottom: 20px;
+}
+
+.prompt-card {
+  display: grid;
+  gap: 12px;
+}
+
+.prompt-card pre {
+  min-height: 170px;
+  white-space: pre-wrap;
 }
 
 .prompt-panel {
