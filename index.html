@@ -4,6 +4,208 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI開発研修ポータル</title>
+    <link rel="stylesheet" href="styles.css?v=levelup-20260527" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">社内研修</p>
+        <h1>AI開発研修ポータル</h1>
+        <p class="lead">
+          GitHub、Codex、Claude Codeを使って、開発の流れを少しずつ学ぶための入口です。
+        </p>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="学習メニュー">
+      <button class="tab-button active" data-view="home">トップ</button>
+      <button class="tab-button" data-view="tasks">実践課題</button>
+      <button class="tab-button" data-view="terms">用語学習</button>
+      <button class="tab-button" data-view="quiz">用語クイズ</button>
+      <button class="tab-button" data-view="github">GitHubガイド</button>
+      <button class="tab-button" data-view="prompts">プロンプト集</button>
+    </nav>
+
+    <main>
+      <section id="home" class="view active">
+        <div class="section-heading">
+          <h2>まずは全体像をつかむ</h2>
+          <p>このポータルでは、資料を読むだけでなく、実際に手を動かしながら学びます。</p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="card">
+            <span class="card-label">Step 1</span>
+            <h3>GitHubに記録する</h3>
+            <p>README、要件定義書、学習ログ、プロンプト集を保存して、あとから見返せる状態にします。</p>
+          </article>
+          <article class="card">
+            <span class="card-label">Step 2</span>
+            <h3>Codexで作る</h3>
+            <p>画面や機能をCodexに依頼し、小さく動くアプリを作っていきます。</p>
+          </article>
+          <article class="card">
+            <span class="card-label">Step 3</span>
+            <h3>Claude Codeで見直す</h3>
+            <p>作ったコードを読みやすくしたり、改善点を確認したりします。</p>
+          </article>
+          <article class="card">
+            <span class="card-label">Step 4</span>
+            <h3>用語を覚えて確認する</h3>
+            <p>まず用語学習で意味をつかみ、そのあと用語クイズで理解度を確認します。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tasks" class="view">
+        <div class="section-heading">
+          <h2>実践課題</h2>
+          <p>完了条件を見ながら、ひとつずつ進めます。</p>
+        </div>
+        <div id="task-list" class="task-list"></div>
+      </section>
+
+      <section id="terms" class="view">
+        <div class="section-heading">
+          <h2>用語学習</h2>
+          <p>クイズの前に、システム開発でよく使う言葉をやさしく確認します。</p>
+        </div>
+
+        <div class="term-tools" aria-label="ツール別用語">
+          <button class="term-filter active" type="button" data-term-filter="all">すべて</button>
+          <button class="term-filter" type="button" data-term-filter="GitHub">GitHub</button>
+          <button class="term-filter" type="button" data-term-filter="Codex">Codex</button>
+          <button class="term-filter" type="button" data-term-filter="Claude Code">Claude Code</button>
+        </div>
+
+        <p id="term-count" class="count-note"></p>
+        <div id="term-list" class="term-list"></div>
+      </section>
+
+      <section id="quiz" class="view">
+        <div class="section-heading">
+          <h2>専門用語クイズ</h2>
+          <p>初級、中級、上級をクリアして、称号を集めます。</p>
+        </div>
+
+        <div class="level-grid" aria-label="クイズレベル">
+          <button class="level-button active" type="button" data-level="beginner">初級</button>
+          <button class="level-button" type="button" data-level="intermediate">中級</button>
+          <button class="level-button" type="button" data-level="advanced">上級</button>
+        </div>
+
+        <div class="score-board">
+          <div>
+            <span class="score-label">現在の称号</span>
+            <strong id="quiz-title">見習い</strong>
+          </div>
+          <div>
+            <span class="score-label">クリア数</span>
+            <strong id="quiz-clear-count">0 / 3</strong>
+          </div>
+          <div>
+            <span class="score-label">最高スコア</span>
+            <strong id="quiz-best-score">未挑戦</strong>
+          </div>
+        </div>
+
+        <article class="quiz-panel" aria-live="polite">
+          <div class="quiz-status">
+            <span id="quiz-category" class="pill">初級</span>
+            <span id="quiz-progress">1 / 8</span>
+            <span id="quiz-score">正解 0</span>
+          </div>
+
+          <h3 id="quiz-question">問題文</h3>
+          <div id="quiz-options" class="quiz-options"></div>
+
+          <div id="quiz-feedback" class="quiz-feedback" hidden></div>
+          <button id="quiz-next" class="primary-action" type="button" hidden>次の問題へ</button>
+        </article>
+      </section>
+
+      <section id="github" class="view">
+        <div class="section-heading">
+          <h2>GitHubガイド</h2>
+          <p>今日使った操作を、初心者向けに整理しています。</p>
+        </div>
+
+        <div class="guide-layout">
+          <article class="guide-block">
+            <h3>GitHubとは</h3>
+            <p>開発で使うファイルや資料を保存・共有するためのサービスです。</p>
+          </article>
+          <article class="guide-block">
+            <h3>リポジトリ</h3>
+            <p>プロジェクトを入れる箱です。今回の例では <strong>ai-dev-training-portal</strong> がリポジトリです。</p>
+          </article>
+          <article class="guide-block">
+            <h3>README</h3>
+            <p>プロジェクトの説明書です。リポジトリを開いた人が最初に読む場所です。</p>
+          </article>
+          <article class="guide-block">
+            <h3>Commit</h3>
+            <p>変更を保存することです。ファイルを作ったり直したりしたらCommitします。</p>
+          </article>
+        </div>
+
+        <div class="steps">
+          <h3>新しいファイルを作る手順</h3>
+          <ol>
+            <li>リポジトリを開く</li>
+            <li><strong>Add file</strong> を押す</li>
+            <li><strong>Create new file</strong> を押す</li>
+            <li>ファイル名と本文を入力する</li>
+            <li><strong>Commit changes</strong> で保存する</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="prompts" class="view">
+        <div class="section-heading">
+          <h2>プロンプト集</h2>
+          <p>よく使う依頼文をカテゴリ別に残して、すぐ取り出せるようにします。</p>
+        </div>
+
+        <div id="prompt-categories" class="prompt-categories" aria-label="プロンプトカテゴリ"></div>
+        <div id="prompt-list" class="prompt-list"></div>
+
+        <article class="prompt-panel">
+          <div>
+            <h3>プロンプト記録テンプレート</h3>
+            <p>目的、入力した文章、結果、改善点をセットで残します。</p>
+          </div>
+          <pre><code># プロンプト記録
+
+## 使ったツール
+- ChatGPT
+- Codex
+- Claude Code
+
+## 目的
+何をしたくて使ったかを書く。
+
+## 入力したプロンプト
+ここに実際の依頼文を書く。
+
+## 返ってきた結果
+回答や作られたものを書く。
+
+## 次に試すこと
+改善したい聞き方を書く。</code></pre>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js?v=levelup-20260527"></script>
+  </body>
+</html>
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI開発研修ポータル</title>
     <link rel="stylesheet" href="styles.css?v=quiz-20260526" />
   </head>
   <body>
